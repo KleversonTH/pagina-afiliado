@@ -357,6 +357,12 @@ a{color:inherit;}
   position:relative;
   border-bottom:1px solid var(--line);
 }
+.product-media img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:16px;
+}
 .product-media .ph-num{
   font-family:'JetBrains Mono', monospace;
   font-size:13px;
