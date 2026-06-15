@@ -362,6 +362,7 @@ a{color:inherit;}
   height:100%;
   object-fit:contain;
   padding:16px;
+  mix-blend-mode:screen;
 }
 .product-media .ph-num{
   font-family:'JetBrains Mono', monospace;
