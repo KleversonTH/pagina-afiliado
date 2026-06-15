@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specwise — Gadgets testados e comparados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0C12;
+    --bg-2:#12141E;
+    --panel:#161825;
+    --line:rgba(255,255,255,0.08);
+    --line-strong:rgba(255,255,255,0.16);
+    --text:#E9E8F0;
+    --text-soft:#9B9AAE;
+    --neon:#C147E9;
+    --neon-deep:#8E2DB8;
+    --cyan:#4EE8E8;
+    --cyan-deep:#2BA8A8;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  h1,h2,h3,h4{
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    letter-spacing:0.02em;
+    margin:0;
+    text-transform:uppercase;
+  }
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    border-bottom:1px solid var(--line);
+    background:rgba(11,12,18,0.85);
+    backdrop-filter:blur(8px);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .topbar-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 24px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-size:20px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .logo-mark{
+    width:34px; height:34px;
+    border:1px solid var(--neon);
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    color:var(--neon);
+    background:rgba(193,71,233,0.08);
+    box-shadow:0 0 14px rgba(193,71,233,0.35);
+    flex-shrink:0;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    font-size:14px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--text-soft);
+    border-bottom:2px solid transparent;
+    padding-bottom:4px;
+    transition:color .15s, border-color .15s;
+  }
+  .nav-links a:hover{color:var(--text); border-color:var(--neon);}
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    position:relative;
+    background:
+      radial-gradient(700px 420px at 85% -10%, rgba(193,71,233,0.16), transparent 60%),
+      radial-gradient(600px 360px at -10% 110%, rgba(78,232,232,0.10), transparent 60%),
+      var(--bg);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    align-items:stretch;
+  }
+  @media (max-width:880px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .hero-left{
+    padding:72px 24px 64px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    max-width:560px;
+  }
+  .hero-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--cyan);
+    border:1px solid var(--cyan-deep);
+    border-radius:999px;
+    padding:6px 14px;
+    margin-bottom:24px;
+    width:fit-content;
+    background:rgba(78,232,232,0.06);
+  }
+  .hero-eyebrow::before{
+    content:'';
+    width:8px; height:8px;
+    background:var(--neon);
+    border-radius:50%;
+    box-shadow:0 0 8px var(--neon);
+    display:inline-block;
+  }
+  .hero-left h1{
+    font-size:clamp(40px, 6vw, 66px);
+    line-height:1.02;
+    margin-bottom:20px;
+  }
+  .hero-left h1 .accent{
+    color:var(--neon);
+    text-shadow:0 0 18px rgba(193,71,233,0.55);
+  }
+  .hero-left p{
+    font-size:17px;
+    color:var(--text-soft);
+    max-width:460px;
+    margin-bottom:32px;
+  }
+  .hero-cta-row{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:36px;
+  }
+  .btn{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    padding:14px 28px;
+    border-radius:6px;
+    border:1.5px solid var(--neon);
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:transform .12s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--neon); color:#0B0C12; box-shadow:0 0 22px rgba(193,71,233,0.35);}
+  .btn-primary:hover{background:var(--neon-deep); border-color:var(--neon-deep); transform:translateY(-2px); box-shadow:0 0 26px rgba(193,71,233,0.5);}
+  .btn-secondary{background:transparent; color:var(--text); border-color:var(--line-strong);}
+  .btn-secondary:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px);}
+
+  .hero-meta{
+    display:flex;
+    gap:32px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-soft);
+    flex-wrap:wrap;
+  }
+  .hero-meta strong{
+    display:block;
+    font-size:22px;
+    color:var(--cyan);
+    font-weight:700;
+  }
+
+  /* ---------- HERO RIGHT: spec panel ---------- */
+  .hero-right{
+    background:var(--bg-2);
+    border-left:1px solid var(--line);
+    padding:48px 32px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+  }
+  .panel-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--neon);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .panel-label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .spec-card{
+    border:1px solid var(--line-strong);
+    border-radius:8px;
+    padding:24px;
+    margin-bottom:16px;
+    background:var(--panel);
+    box-shadow:0 12px 32px -16px rgba(193,71,233,0.25);
+  }
+  .spec-card h3{
+    font-size:18px;
+    color:var(--text);
+    margin-bottom:14px;
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .spec-row{
+    display:flex;
+    justify-content:space-between;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:7px 0;
+    border-bottom:1px dashed var(--line);
+    color:var(--text-soft);
+  }
+  .spec-row:last-child{border-bottom:none;}
+  .spec-row span:last-child{color:var(--cyan); font-weight:500;}
+  .spec-rating{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--neon);
+  }
+  .bars{display:flex; gap:3px;}
+  .bar{width:6px; height:14px; background:var(--line); border-radius:1px;}
+  .bar.on{background:var(--neon); box-shadow:0 0 6px rgba(193,71,233,0.6);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:72px 24px;}
+  .section.alt{background:var(--bg-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:40px;
+  }
+  .section-head .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    display:block;
+    margin-bottom:8px;
+  }
+  .section-head h2{font-size:clamp(28px,4vw,38px); line-height:1.1;}
+  .section-head p{color:var(--text-soft); max-width:420px; font-size:15px; margin:0;}
+
+  /* ---------- PRODUCT GRID ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  @media (max-width:920px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:620px){ .grid{grid-template-columns:1fr;} }
+
+  .product-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .product-card:hover{
+    border-color:var(--neon-deep);
+    transform:translateY(-3px);
+    box-shadow:0 14px 36px -20px rgba(193,71,233,0.45);
+  }
+
+  .product-media{
+    aspect-ratio:4/3;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 18px, var(--line) 18px 19px),
+      var(--bg-2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .product-media .ph-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-soft);
+    background:var(--bg);
+    border:1px solid var(--line-strong);
+    padding:4px 10px;
+    border-radius:4px;
+  }
+  .product-badge{
+    position:absolute; top:12px; left:12px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    background:var(--neon);
+    color:#0B0C12;
+    padding:4px 10px;
+    border-radius:4px;
+    font-weight:700;
+    box-shadow:0 0 14px rgba(193,71,233,0.45);
+  }
+
+  .product-body{padding:18px 18px 20px; display:flex; flex-direction:column; flex:1;}
+  .product-cat{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    margin-bottom:6px;
+  }
+  .product-body h3{
+    font-size:18px;
+    text-transform:none;
+    letter-spacing:0;
+    margin-bottom:8px;
+    line-height:1.25;
+    color:var(--text);
+  }
+  .product-desc{
+    font-size:14px;
+    color:var(--text-soft);
+    margin-bottom:14px;
+    flex:1;
+  }
+  .product-specs{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-soft);
+    border-top:1px dashed var(--line);
+    padding-top:10px;
+    margin-bottom:14px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 12px;
+  }
+  .product-specs b{color:var(--text); font-weight:500;}
+
+  .product-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .product-price{
+    font-family:'JetBrains Mono', monospace;
+    font-size:18px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .product-price small{
+    display:block;
+    font-size:11px;
+    font-weight:400;
+    color:var(--text-soft);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .product-link{
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    background:var(--neon);
+    color:#0B0C12;
+    padding:10px 16px;
+    border-radius:6px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:background .15s, transform .12s, box-shadow .15s;
+    box-shadow:0 0 16px rgba(193,71,233,0.3);
+  }
+  .product-link:hover{background:var(--cyan); box-shadow:0 0 16px rgba(78,232,232,0.4); transform:translateY(-2px);}
+
+  /* ---------- HOW WE TEST ---------- */
+  .how-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  @media (max-width:880px){ .how-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .how-grid{grid-template-columns:1fr;} }
+  .how-cell{
+    background:var(--panel);
+    padding:28px 22px;
+  }
+  .how-cell .num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--neon);
+    margin-bottom:10px;
+    font-weight:700;
+  }
+  .how-cell h4{
+    font-size:16px;
+    text-transform:none;
+    letter-spacing:0;
+    margin-bottom:8px;
+    color:var(--text);
+  }
+  .how-cell p{font-size:14px; color:var(--text-soft); margin:0;}
+
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter{
+    background:var(--panel);
+    border:1px solid var(--line-strong);
+    border-radius:14px;
+    padding:48px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:32px;
+    flex-wrap:wrap;
+    box-shadow:0 0 60px -30px rgba(193,71,233,0.35);
+  }
+  .newsletter h2{color:var(--text); font-size:clamp(24px,3.6vw,34px); max-width:380px; line-height:1.15;}
+  .newsletter p{color:var(--text-soft); font-size:14px; margin:10px 0 0; max-width:380px;}
+  .newsletter-form{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .newsletter-form input{
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    padding:13px 16px;
+    border-radius:6px;
+    border:1px solid var(--line-strong);
+    background:var(--bg);
+    color:var(--text);
+    min-width:220px;
+  }
+  .newsletter-form input::placeholder{color:var(--text-soft);}
+  .newsletter-form input:focus{outline:none; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(78,232,232,0.15);}
+  .newsletter-form .btn-primary{background:var(--cyan); color:#0B0C12; border-color:var(--cyan); box-shadow:0 0 22px rgba(78,232,232,0.3);}
+  .newsletter-form .btn-primary:hover{background:var(--cyan-deep); border-color:var(--cyan-deep);}
+
+  /* ---------- DISCLOSURE ---------- */
+  .disclosure{
+    font-size:13px;
+    color:var(--text-soft);
+    border:1px dashed var(--line-strong);
+    border-radius:8px;
+    padding:18px 22px;
+    background:var(--bg-2);
+    line-height:1.7;
+  }
+  .disclosure b{color:var(--text);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 24px 32px;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    font-size:13px;
+    color:var(--text-soft);
+  }
+  .footer-links{display:flex; gap:20px; flex-wrap:wrap;}
+  .footer-links a{text-decoration:none; color:var(--text-soft);}
+  .footer-links a:hover{color:var(--neon);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner wrap" style="padding-left:0; padding-right:0;">
+    <div class="logo">
+      <span class="logo-mark">SW</span>
+      Specwise
+    </div>
+    <nav class="nav-links">
+      <a href="#vitrine">Vitrine</a>
+      <a href="#metodo">Como testamos</a>
+      <a href="#newsletter">Newsletter</a>
+    </nav>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left wrap" style="padding-left:24px;">
+      <span class="hero-eyebrow">Boletim semanal · edição #014</span>
+      <h1>Gadgets testados <span class="accent">antes</span> de você comprar.</h1>
+      <p>Reunimos fichas técnicas, comparativos e os melhores preços de eletrônicos que valem o investimento — sem enrolação, sem review patrocinada disfarçada.</p>
+      <div class="hero-cta-row">
+        <a href="#vitrine" class="btn btn-primary">Ver vitrine de produtos</a>
+        <a href="#metodo" class="btn btn-secondary">Como avaliamos</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>120+</strong>produtos testados</div>
+        <div><strong>4.7</strong>nota média dos leitores</div>
+        <div><strong>2x</strong>por semana, novos posts</div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <span class="panel-label">Destaque da semana</span>
+      <div class="spec-card">
+        <h3>Fone TWS Aria Pro 2</h3>
+        <div class="spec-row"><span>Cancelamento de ruído</span><span>−32 dB</span></div>
+        <div class="spec-row"><span>Bateria (estojo)</span><span>32 h</span></div>
+        <div class="spec-row"><span>Resistência</span><span>IPX5</span></div>
+        <div class="spec-row"><span>Latência</span><span>54 ms</span></div>
+        <div class="spec-rating">
+          Nota geral: 9.1/10
+          <div class="bars">
+            <div class="bar on"></div><div class="bar on"></div><div class="bar on"></div>
+            <div class="bar on"></div><div class="bar on"></div><div class="bar on"></div>
+            <div class="bar on"></div><div class="bar on"></div><div class="bar on"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="vitrine">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="tag">Vitrine atual</span>
+        <h2>Selecionados deste mês</h2>
+      </div>
+      <p>Cada item passa por no mínimo 7 dias de uso real antes de entrar na lista. Substitua os campos abaixo pelos seus links de afiliado.</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="product-card">
+        <div class="product-media">
+          <span class="product-badge">Mais vendido</span>
+          <span class="ph-num">imagem do produto</span>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">Áudio</span>
+          <h3>Fone TWS Aria Pro 2</h3>
+          <p class="product-desc">Cancelamento ativo de ruído equilibrado, ótimo para reuniões e viagens longas.</p>
+          <div class="product-specs">
+            <span>Bateria <b>32h</b></span>
+            <span>ANC <b>−32dB</b></span>
+            <span>Peso <b>4.8g</b></span>
+            <span>Conexão <b>BT 5.3</b></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">R$ 349<small>à vista</small></div>
+            <a href="#" class="product-link">Ver oferta →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-media">
+          <span class="ph-num">imagem do produto</span>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">Casa inteligente</span>
+          <h3>Smart Plug Nexa 16A</h3>
+          <p class="product-desc">Controle remoto de tomadas com agendamento e medição de consumo em tempo real.</p>
+          <div class="product-specs">
+            <span>Corrente <b>16A</b></span>
+            <span>Wi-Fi <b>2.4GHz</b></span>
+            <span>App <b>iOS/And.</b></span>
+            <span>Voz <b>Alexa/GA</b></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">R$ 79<small>à vista</small></div>
+            <a href="#" class="product-link">Ver oferta →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-media">
+          <span class="product-badge">Custo-benefício</span>
+          <span class="ph-num">imagem do produto</span>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">Mobilidade</span>
+          <h3>Power Bank Volt 20K</h3>
+          <p class="product-desc">20.000mAh com carregamento rápido de 30W para celular e notebook leve.</p>
+          <div class="product-specs">
+            <span>Capac. <b>20.000mAh</b></span>
+            <span>Saída <b>30W PD</b></span>
+            <span>Portas <b>USB-C/A</b></span>
+            <span>Peso <b>390g</b></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">R$ 159<small>à vista</small></div>
+            <a href="#" class="product-link">Ver oferta →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-media">
+          <span class="ph-num">imagem do produto</span>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">Periféricos</span>
+          <h3>Mouse Vertical Ergo X</h3>
+          <p class="product-desc">Pega vertical de 57° que reduz a tensão no punho durante uso prolongado.</p>
+          <div class="product-specs">
+            <span>DPI <b>até 4000</b></span>
+            <span>Conexão <b>2.4G/BT</b></span>
+            <span>Bateria <b>70 dias</b></span>
+            <span>Botões <b>6</b></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">R$ 129<small>à vista</small></div>
+            <a href="#" class="product-link">Ver oferta →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-media">
+          <span class="product-badge">Novo</span>
+          <span class="ph-num">imagem do produto</span>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">Fotografia</span>
+          <h3>Tripé Flex Mini</h3>
+          <p class="product-desc">Pernas flexíveis que se adaptam a qualquer superfície, suporta até 1.5kg.</p>
+          <div class="product-specs">
+            <span>Carga <b>1.5kg</b></span>
+            <span>Altura <b>22cm</b></span>
+            <span>Encaixe <b>1/4"</b></span>
+            <span>Peso <b>180g</b></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">R$ 69<small>à vista</small></div>
+            <a href="#" class="product-link">Ver oferta →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-media">
+          <span class="ph-num">imagem do produto</span>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">Monitores</span>
+          <h3>Monitor Curvo Lumen 27"</h3>
+          <p class="product-desc">Painel curvo de 27" com 165Hz, ideal para trabalho e jogos casuais.</p>
+          <div class="product-specs">
+            <span>Taxa <b>165Hz</b></span>
+            <span>Resolução <b>QHD</b></span>
+            <span>Painel <b>VA curvo</b></span>
+            <span>Entradas <b>HDMI/DP</b></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">R$ 1.299<small>à vista</small></div>
+            <a href="#" class="product-link">Ver oferta →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="metodo">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="tag">Metodologia</span>
+        <h2>Como testamos cada produto</h2>
+      </div>
+      <p>Transparência é a base da confiança. É assim que cada item chega até a vitrine.</p>
+    </div>
+
+    <div class="how-grid">
+      <div class="how-cell">
+        <div class="num">01 / uso</div>
+        <h4>Mínimo 7 dias de uso real</h4>
+        <p>Sem opinião de caixa fechada — testamos no dia a dia antes de qualquer recomendação.</p>
+      </div>
+      <div class="how-cell">
+        <div class="num">02 / specs</div>
+        <h4>Ficha técnica verificada</h4>
+        <p>Comparamos os números do fabricante com medições próprias quando possível.</p>
+      </div>
+      <div class="how-cell">
+        <div class="num">03 / preço</div>
+        <h4>Histórico de preço</h4>
+        <p>Só indicamos quando o preço atual está dentro da média ou abaixo dela.</p>
+      </div>
+      <div class="how-cell">
+        <div class="num">04 / nota</div>
+        <h4>Nota final ponderada</h4>
+        <p>Desempenho, durabilidade e custo-benefício pesam na nota que você vê.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="newsletter">
+  <div class="wrap">
+    <div class="newsletter">
+      <div>
+        <h2>Receba os melhores achados toda semana</h2>
+        <p>Sem spam. Apenas os produtos que realmente valem o clique, direto na sua caixa de entrada.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="seuemail@exemplo.com" required>
+        <button type="submit" class="btn btn-primary">Quero receber</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="disclosure">
+      <b>Divulgação de afiliados:</b> alguns links nesta página são links de afiliado. Se você comprar através deles, podemos receber uma comissão sem custo adicional para você. Isso ajuda a manter este site funcionando e não influencia nossas avaliações.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="logo" style="font-size:16px;">
+      <span class="logo-mark" style="width:26px;height:26px;font-size:11px;">SW</span>
+      Specwise
+    </div>
+    <div class="footer-links">
+      <a href="#vitrine">Vitrine</a>
+      <a href="#metodo">Metodologia</a>
+      <a href="#">Política de privacidade</a>
+      <a href="#">Contato</a>
+    </div>
+    <div>© 2026 Specwise. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+</body>
+</html>
