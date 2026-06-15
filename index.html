@@ -208,7 +208,7 @@
     font-weight:700;
   }
 
-  /* ---------- HERO RIGHT: spec panel ---------- */
+  /* ---------- HERO RIGHT: product showcase ---------- */
   .hero-right{
     background:var(--bg-2);
     border-left:1px solid var(--line);
@@ -216,63 +216,98 @@
     display:flex;
     flex-direction:column;
     justify-content:center;
+    align-items:center;
     position:relative;
   }
-  .panel-label{
+  .showcase-label{
     font-family:'JetBrains Mono', monospace;
     font-size:12px;
     letter-spacing:0.18em;
     text-transform:uppercase;
     color:var(--neon);
-    margin-bottom:20px;
+    margin-bottom:24px;
+    align-self:flex-start;
     display:flex;
     align-items:center;
     gap:10px;
+    width:100%;
   }
-  .panel-label::after{
+  .showcase-label::after{
     content:'';
     flex:1;
     height:1px;
     background:var(--line);
   }
-  .spec-card{
+  .showcase-media{
+    width:100%;
+    aspect-ratio:1/1;
+    max-width:380px;
     border:1px solid var(--line-strong);
-    border-radius:8px;
-    padding:24px;
-    margin-bottom:16px;
-    background:var(--panel);
-    box-shadow:0 12px 32px -16px rgba(193,71,233,0.25);
-  }
-  .spec-card h3{
-    font-size:18px;
-    color:var(--text);
-    margin-bottom:14px;
-    text-transform:none;
-    letter-spacing:0;
-  }
-  .spec-row{
-    display:flex;
-    justify-content:space-between;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    padding:7px 0;
-    border-bottom:1px dashed var(--line);
-    color:var(--text-soft);
-  }
-  .spec-row:last-child{border-bottom:none;}
-  .spec-row span:last-child{color:var(--cyan); font-weight:500;}
-  .spec-rating{
+    border-radius:12px;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 20px, var(--line) 20px 21px),
+      var(--panel);
     display:flex;
     align-items:center;
-    gap:8px;
-    margin-top:16px;
+    justify-content:center;
+    position:relative;
+    box-shadow:0 16px 48px -24px rgba(193,71,233,0.4);
+  }
+  .showcase-media .ph-num{
     font-family:'JetBrains Mono', monospace;
     font-size:13px;
-    color:var(--neon);
+    color:var(--text-soft);
+    background:var(--bg);
+    border:1px solid var(--line-strong);
+    padding:4px 10px;
+    border-radius:4px;
   }
-  .bars{display:flex; gap:3px;}
-  .bar{width:6px; height:14px; background:var(--line); border-radius:1px;}
-  .bar.on{background:var(--neon); box-shadow:0 0 6px rgba(193,71,233,0.6);}
+  .showcase-price{
+    position:absolute;
+    bottom:16px;
+    right:16px;
+    background:var(--neon);
+    color:#0B0C12;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:20px;
+    padding:10px 18px;
+    border-radius:8px;
+    box-shadow:0 0 20px rgba(193,71,233,0.5);
+  }
+  .showcase-badge{
+    position:absolute;
+    top:16px;
+    left:16px;
+    background:var(--cyan);
+    color:#0B0C12;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:6px;
+    box-shadow:0 0 16px rgba(78,232,232,0.4);
+  }
+  .showcase-caption{
+    width:100%;
+    max-width:380px;
+    margin-top:18px;
+    text-align:left;
+  }
+  .showcase-caption h3{
+    font-size:18px;
+    color:var(--text);
+    text-transform:none;
+    letter-spacing:0;
+    margin-bottom:4px;
+  }
+  .showcase-caption p{
+    font-size:13px;
+    color:var(--text-soft);
+    margin:0;
+  }
 
   /* ---------- SECTION HEADERS ---------- */
   .section{padding:72px 24px;}
@@ -558,22 +593,15 @@
     </div>
 
     <div class="hero-right">
-      <span class="panel-label">Destaque da semana</span>
-      <div class="spec-card">
+      <span class="showcase-label">Destaque da semana</span>
+      <div class="showcase-media">
+        <span class="showcase-badge">−20%</span>
+        <img src="caminho-da-imagem.jpg" alt="Nome do produto" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+        <span class="showcase-price">R$ 349</span>
+      </div>
+      <div class="showcase-caption">
         <h3>Fone TWS Aria Pro 2</h3>
-        <div class="spec-row"><span>Cancelamento de ruído</span><span>−32 dB</span></div>
-        <div class="spec-row"><span>Bateria (estojo)</span><span>32 h</span></div>
-        <div class="spec-row"><span>Resistência</span><span>IPX5</span></div>
-        <div class="spec-row"><span>Latência</span><span>54 ms</span></div>
-        <div class="spec-rating">
-          Nota geral: 9.1/10
-          <div class="bars">
-            <div class="bar on"></div><div class="bar on"></div><div class="bar on"></div>
-            <div class="bar on"></div><div class="bar on"></div><div class="bar on"></div>
-            <div class="bar on"></div><div class="bar on"></div><div class="bar on"></div>
-            <div class="bar"></div>
-          </div>
-        </div>
+        <p>Cancelamento ativo de ruído, 32h de bateria e nota 9.1/10 no nosso teste.</p>
       </div>
     </div>
   </div>
